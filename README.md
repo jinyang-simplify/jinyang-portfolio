@@ -1,46 +1,29 @@
-# jinyang-simplify
+# jinyang-portfolio
 
-杨金的个人作品集，记录我在 AI 产品运营、内容策略、AI 工作流与建筑设计中的实践。
+杨金的个人作品集网站，记录我在 AI 产品、内容运营、工作流设计与建筑设计中的实践。
 
-这里展示的是完整项目过程：从用户问题与项目背景出发，说明我做了什么，以及最终产生了什么效果。
-
----
+每个案例按照“用户问题与背景 → 我做了什么 → 最终效果”展开，公开仓库不包含个人简历、私人照片或联系方式。
 
 ## Featured projects
 
-- [稿定简历](public/projects/resume-notes/) — 面向求职者的可解释 AI 简历优化产品，从岗位理解、证据提取到逐项修改与导出。
-- [图片提示词反推](public/projects/image-prompt/) — 将参考图拆解为结构化、可调整的中文生图提示词。
-- [走马岭数字预运营系统](public/projects/zoumaling/) — 面向乡村文旅项目的数字化运营与体验设计实践。
-- [AI.Simplify Skills](https://github.com/18087627569yj-hue/AI.Simplify) — 将高频工作方法整理成可复用、可安装的 AI Skill。
-
----
-
-## AI workflows
-
-- 文章生成：从主题与资料出发，建立适合长文的完整叙事。
-- 图文笔记：结合图片、用户利益点与平台语感生成可编辑文案。
-- 图片提示词反推：把参考图转换为可复现、可调整的视觉描述。
-- 可编辑 SketchUp 模型：根据图纸、尺寸或参考图建立可继续修改的 SU 模型结构。
-
-Skill 文件与安装说明统一维护在 [AI.Simplify](https://github.com/18087627569yj-hue/AI.Simplify) 仓库，本仓库只负责作品集展示。
-
----
+- [Image Prompt](https://github.com/jinyang-simplify/image-prompt) — 将参考图片转换为结构化中文生图提示词。
+- [稿定简历](https://github.com/jinyang-simplify/gaoding-resume) — 基于岗位要求和真实证据的可解释 AI 简历优化产品。
+- [走马岭数字预运营系统](https://github.com/jinyang-simplify/zoumaling-digital-operations) — 面向乡村文旅的游客体验、路线规划与运营管理系统。
+- [AI.Simplify Skills](https://github.com/jinyang-simplify/ai-simplify-skills) — 面向设计与内容场景的可安装 AI Skill 合集。
 
 ## Repository structure
 
 ```text
-jinyang-simplify/
-├── index.html              # 个人作品集首页
-├── src/                    # 全站样式与交互
+jinyang-portfolio/
+├── index.html
+├── src/
 ├── public/
-│   ├── assets/             # 公开展示素材
-│   └── projects/           # 独立项目详情页
-├── scripts/                # 本地预览与构建脚本
-├── worker/                 # 在线部署入口
-└── docs/                   # 项目说明与产品文档
+│   ├── assets/
+│   └── projects/
+├── scripts/
+├── worker/
+└── docs/
 ```
-
-个人照片、证件照、简历、联系方式以及本地原始素材不包含在公开仓库中；这些文件仍保留在本地，不会因仓库整理而删除。
 
 ## Local development
 
@@ -51,12 +34,6 @@ npm run dev
 
 默认预览地址：`http://localhost:4173`
 
-生成发布版本：
-
-```bash
-npm run build
-```
-
 ## License
 
-[MIT](LICENSE)
+[Apache License 2.0](LICENSE)
