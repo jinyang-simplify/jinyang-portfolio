@@ -1443,3 +1443,12 @@ footer { border-top: 2px solid var(--ink); background: var(--yellow); color: var
   .resume-demo-scrubber { grid-column: 1 / -1; grid-row: 2; }
   .resume-demo-time { grid-column: 2; grid-row: 1; }
 }
+
+/* Compact project navigation */
+.project-pager a { min-height: 105px; padding: 20px 2vw; }
+.project-pager strong { font-size: clamp(18px,2vw,27px); }
+
+@media (max-width: 760px) {
+  .project-pager a { min-height: 76px; padding: 13px 17px; }
+  .project-pager strong { font-size: 18px; }
+}

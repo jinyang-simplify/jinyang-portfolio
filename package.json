@@ -1,11 +1,12 @@
 {
-  "name": "jinyang-portfolio",
+  "name": "jinyang-simplify",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
-    "preview": "python3 -m http.server 4173 --bind 0.0.0.0 --directory dist/client"
+    "preview": "python3 -m http.server 4173 --bind 0.0.0.0 --directory dist/client",
+    "test": "node --test"
   }
 }

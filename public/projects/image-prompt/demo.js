@@ -159,7 +159,32 @@ if (reduceMotion) {
 }
 
 const progress = document.querySelector('.case-progress span')
-window.addEventListener('scroll', () => {
+const chapters = [...document.querySelectorAll('.prompt-chapter')]
+const chapterLinks = [...document.querySelectorAll('.prompt-chapter-nav a')]
+const revealItems = document.querySelectorAll('[data-reveal]')
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return
+    entry.target.classList.add('is-visible')
+    revealObserver.unobserve(entry.target)
+  })
+}, { rootMargin: '0px 0px -10%', threshold: .08 })
+
+revealItems.forEach(item => revealObserver.observe(item))
+
+const updatePage = () => {
   const distance = document.documentElement.scrollHeight - innerHeight
   progress.style.width = `${distance > 0 ? scrollY / distance * 100 : 0}%`
-}, { passive: true })
+
+  let activeChapter = chapters[0]
+  for (const chapter of chapters) {
+    if (chapter.getBoundingClientRect().top <= innerHeight * .4) activeChapter = chapter
+  }
+  chapterLinks.forEach(link => {
+    if (link.hash === `#${activeChapter?.id}`) link.setAttribute('aria-current', 'location')
+    else link.removeAttribute('aria-current')
+  })
+}
+
+updatePage()
+window.addEventListener('scroll', updatePage, { passive: true })

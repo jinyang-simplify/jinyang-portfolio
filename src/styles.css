@@ -15,6 +15,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+html[data-instant-anchor="projects"] { scroll-behavior: auto; }
 body { margin: 0; min-width: 320px; background: var(--white); }
 a { color: inherit; text-decoration: none; }
 button, input, textarea { font: inherit; }
@@ -1306,6 +1307,7 @@ body::before {
 .message-next:hover,
 .message-send:hover,
 .message-reset:hover { background: #fff; color: var(--ink); box-shadow: 6px 6px 0 var(--ink); transform: translate(-2px,-2px); }
+.message-send:disabled { cursor: wait; opacity: .62; transform: none; box-shadow: 2px 2px 0 var(--pink); }
 .message-buttons { margin-top: auto; padding-top: 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .message-back { background: transparent; color: var(--ink); box-shadow: none; }
 .message-back:hover { background: rgba(255,255,255,.55); transform: translateX(-3px); }
@@ -1316,6 +1318,8 @@ body::before {
   color: #9b1c31;
   font: 800 11px/1.35 var(--mono);
 }
+
+.message-trap { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; }
 
 .message-success {
   min-height: 360px;
@@ -1483,6 +1487,7 @@ body::before {
 .message-card-heading span { font: 900 10px/1 var(--mono); letter-spacing: .14em; color: var(--blue); }
 .message-card-heading h3 { margin: 0; font: 900 28px/1.1 var(--mono); }
 .message-card-heading p { max-width: 360px; margin: 0; color: #625f57; font-size: 13px; line-height: 1.55; }
+.message-card-heading .message-board-status { min-height: 20px; margin-top: 5px; font-family: var(--mono); font-size: 11px; }
 
 .message-card-stack {
   display: grid;
@@ -2031,7 +2036,14 @@ body::before {
 }
 
 .community-modal.is-workflow-gallery .community-viewer {
-  background: linear-gradient(180deg, #f4f4f2 0%, #e7e7e4 100%);
+  background-color: #eae6da;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 29px,
+    rgba(23, 21, 17, .11) 30px,
+    transparent 31px
+  );
 }
 
 .workflow-slide {
@@ -2090,46 +2102,4 @@ body::before {
 
 .workflow-thumbnail-preview {
   border: 1px solid #d0d0cc;
-}
-
-/* Public repository privacy placeholders */
-.button.is-disabled,
-.mobile-resume.is-disabled {
-  cursor: default;
-  opacity: .55;
-}
-
-.public-profile-placeholder {
-  min-height: 100%;
-  display: grid;
-  place-content: center;
-  gap: 12px;
-  background: #ececea;
-  color: #111;
-  text-align: center;
-}
-
-.public-profile-placeholder strong {
-  font-size: clamp(4rem, 12vw, 9rem);
-  line-height: .85;
-  letter-spacing: -.08em;
-}
-
-.public-profile-placeholder span,
-.public-repo-note,
-.resume-private-note {
-  font-family: var(--mono);
-  font-size: .75rem;
-  letter-spacing: .08em;
-}
-
-.public-repo-note {
-  margin: 20px 0 0;
-  color: #666;
-}
-
-.resume-private-note {
-  margin: auto;
-  padding: 48px;
-  text-align: center;
 }

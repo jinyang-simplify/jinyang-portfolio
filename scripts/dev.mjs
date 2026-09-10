@@ -1,5 +1,6 @@
 import { createServer } from 'node:http'
-import { readFile, stat } from 'node:fs/promises'
+import { createReadStream } from 'node:fs'
+import { stat } from 'node:fs/promises'
 import { extname, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -19,6 +20,7 @@ const contentTypes = {
   '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.m4v': 'video/mp4',
+  '.mp4': 'video/mp4',
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.webp': 'image/webp',
@@ -72,14 +74,36 @@ const server = createServer(async (request, response) => {
       return
     }
 
-    const body = await readFile(filePath)
-    response.writeHead(200, {
+    const fileInfo = await stat(filePath)
+    const range = request.headers.range?.match(/^bytes=(\d*)-(\d*)$/)
+    const baseHeaders = {
+      'Accept-Ranges': 'bytes',
       'Cache-Control': 'no-store, max-age=0',
       'Content-Type': contentTypes[extname(filePath).toLowerCase()] || 'application/octet-stream',
       'Pragma': 'no-cache',
-    })
+    }
+
+    if (range) {
+      const start = range[1] ? Number(range[1]) : 0
+      const end = range[2] ? Math.min(Number(range[2]), fileInfo.size - 1) : fileInfo.size - 1
+      if (!Number.isInteger(start) || !Number.isInteger(end) || start < 0 || start > end || start >= fileInfo.size) {
+        response.writeHead(416, { ...baseHeaders, 'Content-Range': `bytes */${fileInfo.size}` })
+        response.end()
+        return
+      }
+      response.writeHead(206, {
+        ...baseHeaders,
+        'Content-Length': end - start + 1,
+        'Content-Range': `bytes ${start}-${end}/${fileInfo.size}`,
+      })
+      if (request.method === 'HEAD') response.end()
+      else createReadStream(filePath, { start, end }).pipe(response)
+      return
+    }
+
+    response.writeHead(200, { ...baseHeaders, 'Content-Length': fileInfo.size })
     if (request.method === 'HEAD') response.end()
-    else response.end(body)
+    else createReadStream(filePath).pipe(response)
   } catch (error) {
     response.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' })
     response.end(`Preview server error: ${error.message}`)

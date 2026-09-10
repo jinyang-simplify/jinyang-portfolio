@@ -1,6 +1,17 @@
 const menuButton = document.querySelector('.menu-button')
 const nav = document.querySelector('.nav')
 
+const restoreProjectPosition = () => {
+  if (document.documentElement.dataset.instantAnchor !== 'projects') return
+  document.querySelector('#projects')?.scrollIntoView({ behavior: 'auto', block: 'start' })
+  window.requestAnimationFrame(() => {
+    document.documentElement.removeAttribute('data-instant-anchor')
+  })
+}
+
+if (document.readyState === 'complete') restoreProjectPosition()
+else window.addEventListener('load', restoreProjectPosition, { once: true })
+
 menuButton?.addEventListener('click', () => {
   const isOpen = nav?.classList.toggle('is-open') ?? false
   menuButton.setAttribute('aria-expanded', String(isOpen))
@@ -407,6 +418,8 @@ const messageStatus = messageForm?.querySelector('.message-status')
 const messageSuccess = messageForm?.querySelector('.message-success')
 const messageContent = messageForm?.querySelector('#message-content')
 const messageName = messageForm?.querySelector('#message-name')
+const messageSendButton = messageForm?.querySelector('.message-send')
+const messageTrap = messageForm?.querySelector('[name="website"]')
 
 const setMessageBookOpen = (isOpen, focusEditor = false) => {
   if (isOpen) messageBook?.classList.remove('is-forced-closed')
@@ -468,7 +481,7 @@ messageForm?.querySelectorAll('input, textarea').forEach(field => {
   })
 })
 
-messageForm?.addEventListener('submit', event => {
+messageForm?.addEventListener('submit', async event => {
   event.preventDefault()
   const isMessageValid = markMessageField(messageContent, '先写下至少 4 个字，让我知道你想聊什么。')
   const isNameValid = markMessageField(messageName, '请留下你的称呼。')
@@ -478,17 +491,34 @@ messageForm?.addEventListener('submit', event => {
     return
   }
 
-  const newCard = addUserMessageCard({
+  const draftMessage = {
     name: messageName.value.trim(),
     message: messageContent.value.trim(),
     paper: messageForm.dataset.paper ?? 'lined',
-    createdAt: Date.now(),
-  })
-  if (messageComposeBody) messageComposeBody.hidden = true
-  if (messageSuccess) messageSuccess.hidden = false
-  if (messageBookTitle) messageBookTitle.textContent = '留言已贴上墙'
+    website: messageTrap?.value ?? '',
+  }
+
+  if (messageSendButton) {
+    messageSendButton.disabled = true
+    messageSendButton.textContent = '正在公开保存…'
+  }
   if (messageStatus) messageStatus.textContent = ''
-  window.setTimeout(() => newCard?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 180)
+
+  try {
+    const savedMessage = await publishPublicMessage(draftMessage)
+    const newCard = addUserMessageCard(savedMessage)
+    if (messageComposeBody) messageComposeBody.hidden = true
+    if (messageSuccess) messageSuccess.hidden = false
+    if (messageBookTitle) messageBookTitle.textContent = '留言已贴上墙'
+    window.setTimeout(() => newCard?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 180)
+  } catch (error) {
+    if (messageStatus) messageStatus.textContent = error instanceof Error ? error.message : '留言发布失败，请稍后再试。'
+  } finally {
+    if (messageSendButton) {
+      messageSendButton.disabled = false
+      messageSendButton.textContent = '点击发送'
+    }
+  }
 })
 
 messageForm?.querySelector('.message-reset')?.addEventListener('click', () => {
@@ -503,8 +533,10 @@ messageForm?.querySelector('.message-reset')?.addEventListener('click', () => {
 })
 
 const messageCardStack = document.querySelector('.message-card-stack')
+const messageBoardStatus = document.querySelector('.message-board-status')
 const messageCards = [...(messageCardStack?.querySelectorAll('.message-card') ?? [])]
-const userMessagesStorageKey = 'yangjin-portfolio-messages'
+const publicMessagesEndpoint = '/api/messages'
+const legacyMessagesStorageKey = 'yangjin-portfolio-messages'
 const messagePaperColors = {
   lined: '#f8e8ae',
   grid: '#ccebdd',
@@ -516,6 +548,12 @@ let highestMessageCardLayer = 10
 
 const randomBetween = (minimum, maximum) => Math.random() * (maximum - minimum) + minimum
 const clampNumber = (value, minimum, maximum) => Math.min(Math.max(value, minimum), maximum)
+
+try {
+  window.localStorage.removeItem(legacyMessagesStorageKey)
+} catch {
+  // Ignore browsers where local storage is unavailable; it is no longer used for messages.
+}
 
 const layoutMessageCards = () => {
   messageCardResizeFrame = 0
@@ -605,53 +643,88 @@ const makeMessageCardDraggable = card => {
   })
 }
 
-const createUserMessageCard = ({ name, message, paper = 'lined' }) => {
+const formatMessageDate = createdAt => {
+  const date = new Date(createdAt)
+  if (Number.isNaN(date.getTime())) return '刚刚'
+  const elapsedMinutes = Math.floor((Date.now() - date.getTime()) / 60000)
+  if (elapsedMinutes < 1) return '刚刚'
+  if (elapsedMinutes < 60) return `${elapsedMinutes} 分钟前`
+  if (elapsedMinutes < 1440) return `${Math.floor(elapsedMinutes / 60)} 小时前`
+  return new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric' }).format(date)
+}
+
+const createUserMessageCard = ({ name, message, paper = 'lined', createdAt }) => {
   const card = document.createElement('article')
-  card.className = 'message-card message-card-user is-new'
+  card.className = 'message-card message-card-user'
   card.tabIndex = 0
   card.setAttribute('aria-label', `${name}的留言，可拖动`)
   card.style.backgroundColor = messagePaperColors[paper] ?? messagePaperColors.lined
   card.innerHTML = '<header><span class="message-avatar"></span><div><strong></strong><small>刚刚</small></div></header><p></p><span class="message-card-mark">NEW NOTE</span>'
   card.querySelector('.message-avatar').textContent = Array.from(name)[0] ?? '你'
   card.querySelector('strong').textContent = name
+  card.querySelector('small').textContent = formatMessageDate(createdAt)
   card.querySelector('p').textContent = message
   return card
 }
 
-const readSavedUserMessages = () => {
-  try {
-    const savedMessages = JSON.parse(window.localStorage.getItem(userMessagesStorageKey) ?? '[]')
-    return Array.isArray(savedMessages) ? savedMessages : []
-  } catch {
-    return []
-  }
-}
-
-const saveUserMessage = message => {
-  try {
-    const savedMessages = [...readSavedUserMessages(), message].slice(-18)
-    window.localStorage.setItem(userMessagesStorageKey, JSON.stringify(savedMessages))
-  } catch {
-    // The new card still appears when browser storage is unavailable.
-  }
-}
-
-const addUserMessageCard = (message, shouldSave = true) => {
+const addUserMessageCard = (message, { animate = true, prepend = true, updateLayout = true } = {}) => {
   if (!messageCardStack) return null
   const card = createUserMessageCard(message)
-  messageCardStack.prepend(card)
-  messageCards.unshift(card)
+  if (animate) card.classList.add('is-new')
+  card.querySelector('.message-card-mark').textContent = animate ? 'NEW NOTE' : 'PUBLIC NOTE'
+  if (prepend) {
+    messageCardStack.prepend(card)
+    messageCards.unshift(card)
+  } else {
+    messageCardStack.append(card)
+    messageCards.push(card)
+  }
   makeMessageCardDraggable(card)
-  if (shouldSave) saveUserMessage(message)
-  window.requestAnimationFrame(() => {
-    layoutMessageCards()
-  })
-  window.setTimeout(() => card.classList.remove('is-new'), 650)
+  if (updateLayout) window.requestAnimationFrame(layoutMessageCards)
+  if (animate) window.setTimeout(() => card.classList.remove('is-new'), 650)
   return card
 }
 
+const readJsonResponse = async response => {
+  const data = await response.json().catch(() => null)
+  if (!response.ok) throw new Error(data?.error || '留言服务暂时不可用，请稍后再试。')
+  return data
+}
+
+const publishPublicMessage = async message => {
+  const response = await fetch(publicMessagesEndpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(message),
+  })
+  const data = await readJsonResponse(response)
+  if (!data?.message) throw new Error('留言没有成功保存，请稍后再试。')
+  return data.message
+}
+
+const loadPublicMessages = async () => {
+  if (!messageCardStack) return
+  if (window.location.protocol === 'file:') {
+    if (messageBoardStatus) messageBoardStatus.textContent = '公共留言将在网站上线后显示。'
+    return
+  }
+
+  try {
+    const response = await fetch(publicMessagesEndpoint, { headers: { Accept: 'application/json' } })
+    const data = await readJsonResponse(response)
+    const messages = Array.isArray(data?.messages) ? data.messages : []
+    messageCardStack.replaceChildren()
+    messageCards.splice(0, messageCards.length)
+    messages.forEach(message => addUserMessageCard(message, { animate: false, prepend: false, updateLayout: false }))
+    window.requestAnimationFrame(layoutMessageCards)
+    if (messageBoardStatus) messageBoardStatus.textContent = messages.length ? `${messages.length} 条公开留言` : '还没有留言，来写第一条吧。'
+  } catch {
+    if (messageBoardStatus) messageBoardStatus.textContent = '留言暂时无法加载，请稍后刷新。'
+  }
+}
+
 messageCards.forEach(makeMessageCardDraggable)
-readSavedUserMessages().forEach(message => addUserMessageCard(message, false))
+loadPublicMessages()
 
 window.requestAnimationFrame(layoutMessageCards)
 window.addEventListener('resize', () => {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Image Prompt：把图片提示词反推 Skill 产品化为 Chrome 浏览器插件的 AI 产品案例。">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css?v=20260907-4">
     <title>Image Prompt｜杨金作品集</title>
   </head>
   <body>
@@ -88,41 +88,76 @@
         </div>
       </section>
 
-      <section class="case-layout" id="story">
-        <aside class="case-facts"><p>PROJECT INFO</p><dl><div><dt>项目角色</dt><dd>产品策划<br>体验设计<br>前端实现</dd></div><div><dt>项目类型</dt><dd>AI 工具<br>Chrome 扩展</dd></div><div><dt>当前交付</dt><dd>可安装原型<br>交互演示</dd></div><div><dt>技术工具</dt><dd>WXT · TypeScript<br>Doubao API</dd></div></dl></aside>
-        <article class="case-story">
-          <section class="story-block"><p class="story-index">01 / CONTEXT</p><h2>灵感出现的地方，往往不是 AI 对话框</h2><p class="story-lead">设计师在 Pinterest、素材站或项目网页里看到参考图时，通常要先保存图片，再切换到 AI 工具、上传并重新解释需求。真正耗时的不是模型识图，而是上下文在多个工具之间不断断裂。</p></section>
+      <section class="prompt-editorial" id="story">
+        <div class="prompt-project-meta">
+          <div><span>项目角色</span><p>产品策划 · 体验设计 · 前端实现</p></div>
+          <div><span>项目类型</span><p>多模态 AI / Chrome 扩展</p></div>
+          <div><span>当前交付</span><p>可安装原型 · 交互演示</p></div>
+        </div>
+        <nav class="prompt-chapter-nav" aria-label="案例章节">
+          <a href="#context" aria-current="location"><span>01</span> 用户痛点与背景</a>
+          <a href="#approach"><span>02</span> 我做了什么</a>
+          <a href="#impact"><span>03</span> 最终效果</a>
+        </nav>
 
-          <section class="story-block problem-block">
-            <p class="story-index">02 / THE PROBLEM</p><h2>三个断点，让一次简单的反推变得笨重</h2>
-            <div class="problem-grid"><div><span>01</span><h3>离开现场</h3><p>参考图通常来自浏览过程，但生成提示词必须跳到另一个工具。</p></div><div><span>02</span><h3>重复说明</h3><p>每次都要重新上传图片、说明用途，并补充输出格式要求。</p></div><div><span>03</span><h3>结果不稳定</h3><p>通用图片描述不一定能直接作为生图提示词，也容易遗漏构图与材质。</p></div></div>
+        <article>
+          <section class="prompt-chapter" id="context">
+            <div class="prompt-editorial-copy" data-reveal>
+              <p class="prompt-kicker">01 / CONTEXT <span>用户痛点与背景</span></p>
+              <h2>灵感出现的地方，<br>往往不是 AI 对话框。</h2>
+              <p>设计师在 Pinterest、素材站或项目网页看到参考图后，通常要先保存图片，再切换到 AI 工具重新上传和解释需求。真正耗时的不是模型识图，而是上下文在多个工具之间不断断裂。</p>
+            </div>
+            <div class="prompt-pain-points" data-reveal>
+              <div><span>01</span><h3>离开现场</h3><p>参考图来自浏览过程，生成提示词却必须跳到另一个工具。</p></div>
+              <div><span>02</span><h3>重复说明</h3><p>每次都要重新上传、说明用途，并补充输出格式要求。</p></div>
+              <div><span>03</span><h3>结果不稳定</h3><p>通用图片描述难以直接生图，也容易遗漏构图、材质和光影。</p></div>
+            </div>
           </section>
 
-          <section class="story-block productization-block">
-            <p class="story-index">03 / FROM SKILL TO PRODUCT</p><h2>不是重新做一个模型，而是把方法变成稳定体验</h2>
-            <p class="story-lead">项目起点是一套图片提示词反推 Skill。产品化的关键，是把原本依赖对话的能力拆成固定入口、结构化输出、可继续修改和本地历史，让用户不需要理解背后的提示词工程。</p>
-            <div class="productization-flow" aria-label="从 Skill 到浏览器产品的转化过程"><div><small>01</small><strong>方法规则</strong><span>主体、构图、材质、光影、色彩与风格</span></div><i>→</i><div><small>02</small><strong>结构化输出</strong><span>主提示词、使用建议与可编辑标签</span></div><i>→</i><div><small>03</small><strong>浏览器动作</strong><span>右键、原位生成、修改、复制与历史</span></div></div>
+          <section class="prompt-chapter" id="approach">
+            <div class="prompt-feature-split prompt-feature-row">
+              <div class="prompt-editorial-copy" data-reveal>
+                <p class="prompt-kicker">02 / APPROACH <span>我做了什么</span></p>
+                <h2>不是重新做一个模型，<br>而是把方法变成稳定体验。</h2>
+                <p>我把原本依赖对话的反推 Skill，拆成固定入口、结构化输出、继续修改和本地历史。用户不需要理解背后的提示词工程，也能获得一致的结果。</p>
+              </div>
+              <figure class="prompt-feature-visual prompt-sample-visual" data-reveal>
+                <div class="prompt-sample-grid"><img src="../../assets/projects/prompt/prompt-03.jpg" alt="扁平化建筑效果图提示词案例" loading="lazy"><img src="../../assets/projects/prompt/prompt-40.jpg" alt="城市鸟瞰插画提示词案例" loading="lazy"><img src="../../assets/projects/prompt/prompt-66.jpg" alt="城市分析图提示词案例" loading="lazy"></div>
+                <figcaption><span>方法资产</span> 62 例建筑效果图、展板和分析图提示词，用于评测和校准输出。</figcaption>
+              </figure>
+            </div>
+
+            <div class="prompt-feature-split">
+              <div data-reveal>
+                <p class="prompt-kicker">交互策略 · 原位完成</p>
+                <h3>把功能放回图片旁边。</h3>
+                <p>我选择浏览器扩展而不是上传网页。用户右键选择参考图后，结果卡片直接出现在原图附近，浏览、判断、修改和复制始终发生在同一个上下文中。</p>
+              </div>
+              <figure class="prompt-feature-visual" data-reveal>
+                <img src="../../assets/projects/image-prompt/home-cover.png" alt="Image Prompt 在 Pinterest 页面中原位生成提示词" loading="lazy">
+                <figcaption><span>不离开原页面</span> 发现图片、右键触发、生成与修改连成一条路径。</figcaption>
+              </figure>
+            </div>
           </section>
 
-          <figure class="story-figure sample-figure"><div class="sample-strip"><span><img src="../../assets/projects/prompt/prompt-03.jpg" alt="扁平化建筑效果图提示词案例" loading="lazy"></span><span><img src="../../assets/projects/prompt/prompt-40.jpg" alt="城市鸟瞰插画提示词案例" loading="lazy"></span><span><img src="../../assets/projects/prompt/prompt-66.jpg" alt="活动分析图提示词案例" loading="lazy"></span></div><figcaption><b>既有内容资产</b> 62 例建筑效果图、展板和分析图提示词，为模型输出评测与演示案例提供基础。</figcaption></figure>
-
-          <section class="story-block">
-            <p class="story-index">04 / EXPERIENCE STRATEGY</p><h2>把功能放回图片旁边</h2>
-            <p class="story-lead">最终交互没有采用上传首页，也没有要求用户打开独立工作台。用户对某张图片发起操作后，结果卡片直接出现在目标图片附近，浏览、判断和修改始终发生在同一个上下文中。</p>
-            <div class="interaction-flow" aria-label="插件核心交互流程"><div><b>01</b><strong>发现图片</strong><span>停留在原网页</span></div><em>→</em><div><b>02</b><strong>右键触发</strong><span>只分析主动选择的图</span></div><em>→</em><div><b>03</b><strong>原位生成</strong><span>卡片贴近目标图片</span></div><em>→</em><div><b>04</b><strong>修改复制</strong><span>结果继续进入创作</span></div></div>
+          <section class="prompt-chapter prompt-impact" id="impact">
+            <div class="prompt-feature-split prompt-feature-row">
+              <div class="prompt-editorial-copy" data-reveal>
+                <p class="prompt-kicker">03 / OUTCOME <span>最终效果</span></p>
+                <h2>把“看起来像”，<br>拆成可编辑的视觉语言。</h2>
+                <p>模型返回的不只是一段长文本，而是一份可校验的数据结构。界面分别呈现核心提示词和视觉标签，让用户能直接复制，也能继续调整、保存和恢复历史结果。</p>
+              </div>
+              <figure class="prompt-feature-visual prompt-output-visual" data-reveal>
+                <div class="prompt-output-card"><small>STRUCTURED RESULT</small><h3>约 260–360 字中文提示词</h3><p>画面事实被组织为连贯、具体、可以直接粘贴到生图工具的自然语言。</p><div><b>subject[]</b><b>composition[]</b><b>lighting[]</b><b>palette[]</b><b>style[]</b></div></div>
+                <figcaption><span>结构化输出</span> 主体、构图、光影、色彩与风格都可快速检查。</figcaption>
+              </figure>
+            </div>
+            <div class="prompt-outcomes" data-reveal>
+              <div><span>原位完成</span><p>不离开正在浏览的页面</p></div>
+              <div><span>可继续改</span><p>从一次答案变成可协作初稿</p></div>
+              <div><span>可追溯</span><p>历史记录支持恢复、复制与删除</p></div>
+            </div>
           </section>
-
-          <section class="story-block decision-block">
-            <p class="story-index">05 / PRODUCT DECISIONS</p><h2>三个取舍，定义一个轻量工具</h2>
-            <div class="decision-grid"><article><span>01</span><h3>浏览器插件，而不是上传网页</h3><p>参考图的发现本来就发生在浏览器里，入口越接近图片，用户需要搬运的信息越少。</p></article><article><span>02</span><h3>页面内浮层，而不是跳转新页面</h3><p>让结果贴近原图，用户可以一边观察视觉细节，一边判断提示词是否准确。</p></article><article><span>03</span><h3>允许继续修改，而不是一次性答案</h3><p>“更写实”“改成夜景”等调整不需要重新开始，AI 输出成为可协作的初稿。</p></article></div>
-          </section>
-
-          <section class="story-block anatomy-block">
-            <p class="story-index">06 / OUTPUT DESIGN</p><h2>把“看起来像”拆成可以继续编辑的视觉语言</h2>
-            <p class="story-lead">模型返回的不只是长文本，而是一份可校验的数据结构。界面把核心提示词与标签分别呈现，让用户既能直接复制，也能快速判断模型是否抓住了画面的关键特征。</p>
-            <div class="prompt-anatomy"><div class="anatomy-tags"><span>主体</span><span>构图与视角</span><span>空间层次</span><span>材质</span><span>光线</span><span>色彩</span><span>风格</span></div><div class="anatomy-result"><small>STRUCTURED RESULT</small><h3>约 260–360 字中文提示词</h3><p>画面事实被组织为连贯、具体、可以直接粘贴到生图工具的自然语言，同时返回简短使用建议与五类可编辑标签。</p><div><b>subject[]</b><b>composition[]</b><b>lighting[]</b><b>palette[]</b><b>style[]</b></div></div></div>
-          </section>
-
         </article>
       </section>
 
@@ -132,6 +167,6 @@
     <footer><span>YANG JIN · PORTFOLIO</span><span>© 2026</span></footer>
 
     <script>if (window.location.protocol !== 'file:') { document.querySelectorAll('a[href^="../../../index.html"]').forEach(link => { link.href = link.hash ? `/${link.hash}` : '/' }) }</script>
-    <script src="./demo.js"></script>
+    <script src="./demo.js?v=20260907-2"></script>
   </body>
 </html>
