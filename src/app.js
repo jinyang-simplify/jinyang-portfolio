@@ -279,6 +279,8 @@ const galleryData = {
 }
 
 const communityModal = document.querySelector('.community-modal')
+const communityDialog = communityModal?.querySelector('.community-dialog')
+const communityFeature = communityModal?.querySelector('.community-feature')
 const communityCloseButton = communityModal?.querySelector('.community-close')
 const communityImage = communityModal?.querySelector('.community-feature-phone img')
 const communityCaptionTitle = communityModal?.querySelector('.community-feature figcaption strong')
@@ -292,6 +294,7 @@ let communityThumbnails = []
 let activeGallery = 'community'
 let communityIndex = 0
 let communityReturnFocus = null
+let communityHistoryEntry = false
 
 const getActiveItems = () => galleryData[activeGallery].items
 
@@ -364,12 +367,20 @@ const showCommunitySlide = nextIndex => {
   })
 }
 
-const closeCommunityModal = () => {
+const closeCommunityModal = (options = {}) => {
   if (!communityModal || communityModal.hidden) return
+  const fromHistory = options?.fromHistory === true
   communityModal.hidden = true
+  communityModal.classList.remove('use-landscape-fallback')
   document.body.classList.remove('community-modal-open')
   if (siteShell) siteShell.inert = false
   communityReturnFocus?.focus()
+  if (communityHistoryEntry && !fromHistory) {
+    communityHistoryEntry = false
+    window.history.back()
+  } else {
+    communityHistoryEntry = false
+  }
 }
 
 const openCommunityModal = trigger => {
@@ -385,6 +396,8 @@ const openCommunityModal = trigger => {
   communityModal.hidden = false
   document.body.classList.add('community-modal-open')
   if (siteShell) siteShell.inert = true
+  window.history.pushState({ ...window.history.state, communityGallery: true }, '')
+  communityHistoryEntry = true
   communityCloseButton?.focus()
 }
 
@@ -398,6 +411,75 @@ communityModal?.querySelectorAll('[data-community-close]').forEach(element => {
 
 communityModal?.querySelector('.community-prev')?.addEventListener('click', () => showCommunitySlide(communityIndex - 1))
 communityModal?.querySelector('.community-next')?.addEventListener('click', () => showCommunitySlide(communityIndex + 1))
+
+let gallerySwipeStart = null
+let galleryTouchStart = null
+
+const navigateGalleryFromSwipe = (startX, startY, endX, endY) => {
+  const deltaX = endX - startX
+  const deltaY = endY - startY
+  if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY) * 1.15) return false
+  showCommunitySlide(communityIndex + (deltaX < 0 ? 1 : -1))
+  return true
+}
+
+communityFeature?.addEventListener('pointerdown', event => {
+  if (event.pointerType === 'touch') return
+  if (event.clientX <= 24) return
+  gallerySwipeStart = { id: event.pointerId, x: event.clientX, y: event.clientY }
+  communityFeature.setPointerCapture?.(event.pointerId)
+})
+
+communityFeature?.addEventListener('pointerup', event => {
+  if (event.pointerType === 'touch') return
+  if (!gallerySwipeStart || gallerySwipeStart.id !== event.pointerId) return
+  const { x, y } = gallerySwipeStart
+  gallerySwipeStart = null
+  navigateGalleryFromSwipe(x, y, event.clientX, event.clientY)
+})
+
+communityFeature?.addEventListener('pointercancel', () => { gallerySwipeStart = null })
+
+communityFeature?.addEventListener('touchstart', event => {
+  if (event.touches.length !== 1) return
+  const touch = event.touches[0]
+  if (touch.clientX <= 24) return
+  galleryTouchStart = { id: touch.identifier, x: touch.clientX, y: touch.clientY }
+}, { passive: true })
+
+communityFeature?.addEventListener('touchend', event => {
+  if (!galleryTouchStart) return
+  const touch = [...event.changedTouches].find(item => item.identifier === galleryTouchStart.id)
+  if (!touch) return
+  const { x, y } = galleryTouchStart
+  galleryTouchStart = null
+  navigateGalleryFromSwipe(x, y, touch.clientX, touch.clientY)
+}, { passive: true })
+
+communityFeature?.addEventListener('touchcancel', () => { galleryTouchStart = null }, { passive: true })
+
+let edgeSwipeStart = null
+
+communityModal?.addEventListener('pointerdown', event => {
+  if (event.clientX > 24) return
+  edgeSwipeStart = { id: event.pointerId, x: event.clientX, y: event.clientY }
+})
+
+communityModal?.addEventListener('pointerup', event => {
+  if (!edgeSwipeStart || edgeSwipeStart.id !== event.pointerId) return
+  const deltaX = event.clientX - edgeSwipeStart.x
+  const deltaY = event.clientY - edgeSwipeStart.y
+  edgeSwipeStart = null
+  if (deltaX > 72 && Math.abs(deltaY) < deltaX * .75) closeCommunityModal()
+})
+
+communityModal?.addEventListener('pointercancel', () => { edgeSwipeStart = null })
+communityImage?.addEventListener('dragstart', event => event.preventDefault())
+
+window.addEventListener('popstate', () => {
+  if (communityHistoryEntry && communityModal && !communityModal.hidden) closeCommunityModal({ fromHistory: true })
+})
+
 renderCommunityThumbnails()
 showCommunitySlide(0)
 
@@ -567,8 +649,8 @@ const layoutMessageCards = () => {
   const cardWidth = messageCards[0].offsetWidth
   const rowGap = 28
   const naturalStageHeight = (rows * tallestCard) + ((rows - 1) * rowGap) + (verticalPadding * 2)
-  const minimumStageHeight = columns === 3 ? 570 : columns === 2 ? 680 : 1040
-  const stageHeight = Math.max(naturalStageHeight, minimumStageHeight)
+  const minimumStageHeight = columns === 3 ? 570 : columns === 2 ? 680 : 320
+  const stageHeight = columns === 1 ? minimumStageHeight : Math.max(naturalStageHeight, minimumStageHeight)
   const horizontalSpace = Math.max(0, stageWidth - cardWidth - (horizontalPadding * 2))
   const verticalSpace = Math.max(0, stageHeight - tallestCard - (verticalPadding * 2))
   const slots = messageCards.map((_, index) => ({

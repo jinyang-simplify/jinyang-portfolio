@@ -344,6 +344,185 @@ body.resume-modal-open, body.community-modal-open { overflow: hidden; }
   .resume-close { width: 42px; height: 42px; }
   .resume-viewer { padding: 10px; }
   .resume-page { width: 100%; box-shadow: 0 4px 16px rgba(0,0,0,.16); }
+
+  .community-modal:not(.is-workflow-gallery) .community-dialog { background: #111; }
+  .community-modal:not(.is-workflow-gallery) .community-dialog-header {
+    position: absolute;
+    z-index: 12;
+    inset: max(10px, env(safe-area-inset-top)) 10px auto;
+    min-height: 48px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-dialog-header > div:first-child { display: none; }
+  .community-modal:not(.is-workflow-gallery) .community-dialog-actions { width: 100%; justify-content: space-between; pointer-events: none; }
+  .community-modal:not(.is-workflow-gallery) .community-counter {
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.66);
+    color: #fff;
+    font-size: 12px;
+    backdrop-filter: blur(8px);
+  }
+  .community-modal:not(.is-workflow-gallery) .community-close {
+    width: 46px;
+    height: 46px;
+    border-color: rgba(255,255,255,.9);
+    background: rgba(0,0,0,.66);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(0,0,0,.28);
+    pointer-events: auto;
+    backdrop-filter: blur(8px);
+  }
+  .community-modal:not(.is-workflow-gallery) .community-viewer {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+    background: #111;
+    touch-action: none;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-feature {
+    width: 100%;
+    height: 100%;
+    gap: 0;
+    touch-action: none;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-feature-phone,
+  .community-modal.is-native-gallery .community-feature-phone {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    background: #111;
+    box-shadow: none;
+  }
+  .community-modal:not(.is-workflow-gallery) .ios-status-bar,
+  .community-modal:not(.is-workflow-gallery) .community-nav,
+  .community-modal:not(.is-workflow-gallery) .community-feature figcaption,
+  .community-modal:not(.is-workflow-gallery) .community-thumbnails { display: none; }
+  .community-modal:not(.is-workflow-gallery) .community-screen-crop,
+  .community-modal.is-native-gallery .community-screen-crop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0;
+    background: #111;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-screen-crop img,
+  .community-modal.is-native-gallery .community-screen-crop img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 0;
+    background: #111;
+    box-shadow: none;
+    transform: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 560px) {
+  .community-modal { padding: 0; }
+  .community-modal:not(.is-workflow-gallery) .community-dialog {
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    border: 0;
+    border-radius: 0;
+    background: #111;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-dialog-header {
+    position: absolute;
+    z-index: 12;
+    inset: max(8px, env(safe-area-inset-top)) 10px auto;
+    min-height: 46px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    pointer-events: none;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-dialog-header > div:first-child { display: none; }
+  .community-modal:not(.is-workflow-gallery) .community-dialog-actions { width: 100%; justify-content: space-between; pointer-events: none; }
+  .community-modal:not(.is-workflow-gallery) .community-counter {
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.66);
+    color: #fff;
+    font-size: 12px;
+    backdrop-filter: blur(8px);
+  }
+  .community-modal:not(.is-workflow-gallery) .community-close {
+    width: 44px;
+    height: 44px;
+    border-color: rgba(255,255,255,.9);
+    background: rgba(0,0,0,.66);
+    color: #fff;
+    pointer-events: auto;
+    backdrop-filter: blur(8px);
+  }
+  .community-modal:not(.is-workflow-gallery) .community-viewer {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+    background: #111;
+    touch-action: none;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-feature,
+  .community-modal:not(.is-workflow-gallery) .community-feature-phone {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    gap: 0;
+    aspect-ratio: auto;
+    border: 0;
+    border-radius: 0;
+    background: #111;
+    box-shadow: none;
+    touch-action: none;
+  }
+  .community-modal:not(.is-workflow-gallery) .ios-status-bar,
+  .community-modal:not(.is-workflow-gallery) .community-nav,
+  .community-modal:not(.is-workflow-gallery) .community-feature figcaption,
+  .community-modal:not(.is-workflow-gallery) .community-thumbnails { display: none; }
+  .community-modal:not(.is-workflow-gallery) .community-screen-crop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0;
+    background: #111;
+  }
+  .community-modal:not(.is-workflow-gallery) .community-screen-crop img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 0;
+    background: #111;
+    box-shadow: none;
+    transform: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -370,19 +549,17 @@ body.resume-modal-open, body.community-modal-open { overflow: hidden; }
 body {
   color: var(--ink);
   background-color: var(--paper);
-  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 37px, var(--line) 38px, transparent 39px);
+  background-image:
+    linear-gradient(rgba(72,78,108,.105) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(72,78,108,.105) 1px, transparent 1px);
+  background-size: 30px 30px;
   background-attachment: fixed;
   overflow-x: hidden;
 }
 
 body::before {
-  content: "";
-  position: fixed;
-  z-index: -1;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(circle at 15% 20%, rgba(242,92,149,.07) 0 2px, transparent 2.5px), radial-gradient(circle at 83% 66%, rgba(64,104,214,.065) 0 1.5px, transparent 2px);
-  background-size: 94px 94px, 121px 121px;
+  content: none;
+  display: none;
 }
 
 .site-shell { position: relative; }
@@ -446,31 +623,8 @@ body::before {
 .button:hover { background: var(--yellow); color: var(--ink); box-shadow: 7px 7px 0 var(--ink); transform: translate(-3px,-3px); }
 
 .hero { min-height: 780px; padding: 112px 0 124px; }
-.hero::before,
-.hero::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-}
-.hero::before { width: 72px; height: 72px; left: 4%; bottom: 11%; border: 18px solid var(--pink); border-radius: 50%; animation: notebook-drift 6s ease-in-out infinite; }
-.hero::after { width: 58px; height: 58px; right: 3%; top: 18%; background: var(--blue); transform: rotate(13deg); box-shadow: 5px 5px 0 var(--ink); animation: notebook-drift 7s ease-in-out -2s infinite; }
 .hero-grid { position: relative; grid-template-columns: minmax(0,.92fr) minmax(460px,1.08fr); gap: 76px; }
 .hero-copy { padding-top: 0; }
-.hero-stickers { position: absolute; z-index: 5; inset: -55px 0 auto; pointer-events: none; }
-.hero-sticker {
-  position: absolute;
-  padding: 9px 20px;
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: .09em;
-  box-shadow: 3px 5px 0 rgba(23,21,17,.2);
-  animation: notebook-float 4.6s ease-in-out infinite;
-}
-.sticker-made { left: 5%; background: var(--mint); transform: rotate(-6deg); }
-.sticker-detail { right: 5%; background: #f8e9a8; transform: rotate(5deg); animation-delay: -2.2s; }
 
 .eyebrow {
   width: max-content;
@@ -523,21 +677,6 @@ body::before {
 }
 .hero-art:hover { transform: rotate(-.4deg) translateY(-8px); box-shadow: 18px 20px 0 var(--yellow); }
 .hero-art img { max-height: 620px; object-position: center; }
-.hero-art-tape {
-  position: absolute;
-  z-index: 2;
-  top: -24px;
-  left: 50%;
-  width: max-content;
-  padding: 9px 26px;
-  border: 1px solid rgba(23,21,17,.34);
-  background: rgba(245,207,87,.88);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .12em;
-  transform: translateX(-50%) rotate(-2deg);
-}
 
 .socials > a,
 .socials > button { border-radius: 50%; border-color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
@@ -571,31 +710,65 @@ body::before {
 
 #about .about-grid {
   position: relative;
-  padding: 48px;
-  border: 2px solid var(--ink);
-  background: rgba(255,254,249,.94);
-  box-shadow: var(--paper-shadow);
-  transform: rotate(-.3deg);
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  gap: 64px;
+  padding: 28px 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
 }
-#about .about-grid::before {
-  content: "WHO I AM / 01";
-  position: absolute;
-  top: -22px;
-  right: 34px;
-  padding: 8px 16px;
-  border: 2px solid var(--ink);
-  background: var(--pink);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .09em;
-  transform: rotate(3deg);
+#about .about-grid::before { display: none; }
+.about-copy { order: 1; }
+.profile-card {
+  order: 2;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  outline: 0;
+  background: var(--paper-white);
+  box-shadow: 9px 10px 0 var(--ink);
+  transform: rotate(.6deg);
 }
-.profile-card { border: 2px solid var(--ink); border-radius: 0; background: #e7f0ed; box-shadow: 9px 10px 0 var(--orange); transform: rotate(-1.5deg); }
+.profile-window-bar {
+  height: 42px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 3px solid var(--ink);
+  background: var(--blue);
+  color: #fff;
+  font: 900 12px/1 var(--mono);
+  letter-spacing: .1em;
+}
+.profile-window-bar > span { display: flex; gap: 6px; }
+.profile-window-bar i { width: 13px; height: 13px; display: block; border: 1px solid rgba(255,255,255,.7); background: rgba(255,255,255,.18); }
+#about .profile-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 2304 / 2820;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  object-fit: cover;
+  object-position: center;
+}
 .profile-card figcaption { inset: auto 14px 14px; border: 2px solid var(--ink); background: var(--yellow); color: var(--ink); font-family: var(--mono); transform: rotate(1deg); }
-.profile-card figcaption span { color: var(--ink); }
 .about-copy .section-title { margin: 0 0 30px; }
 .about-copy p { color: #4e4a43; }
+
+#about,
+#experience {
+  background-color: var(--paper);
+  background-image: none;
+}
 
 .skill-grid { gap: 18px; }
 .skill-card {
@@ -714,7 +887,13 @@ body::before {
 .community-dialog-header,
 .resume-dialog-header { background: var(--yellow); }
 .community-viewer,
-.resume-viewer { background-color: #eae6da; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 29px, rgba(23,21,17,.11) 30px, transparent 31px); }
+.resume-viewer {
+  background-color: #f4f1e8;
+  background-image:
+    linear-gradient(rgba(72,78,108,.105) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(72,78,108,.105) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
 
 @keyframes notebook-float {
   0%,100% { translate: 0 0; }
@@ -748,8 +927,7 @@ body::before {
   .hero-grid { grid-template-columns: 1fr; gap: 70px; }
   .hero-copy { order: 1; }
   .hero-art { order: 2; width: min(100%,620px); margin: auto; }
-  .hero-stickers { inset: -46px 0 auto; }
-  #about .about-grid { padding: 40px; transform: none; }
+  #about .about-grid { grid-template-columns: 1fr; padding: 20px 0; transform: none; }
   .skill-grid { grid-template-columns: repeat(2,1fr); }
   .project { padding: 30px; }
   #contact .contact-grid { padding: 44px; }
@@ -763,12 +941,7 @@ body::before {
   .brand { font-size: 15px; }
   .brand-mark { width: 34px; height: 34px; }
   .hero { min-height: 0; padding: 82px 0 88px; }
-  .hero::before { width: 44px; height: 44px; left: -18px; bottom: 28%; border-width: 11px; }
-  .hero::after { width: 34px; height: 34px; right: -12px; top: 34%; }
   .hero-grid { gap: 58px; }
-  .hero-sticker { padding: 7px 12px; font-size: 9px; }
-  .sticker-made { left: 0; }
-  .sticker-detail { right: 0; }
   .eyebrow { margin-bottom: 20px; font-size: 19px; }
   .hero h1 { font-size: clamp(35px,10.5vw,48px); }
   .hero-tagline { font-size: clamp(29px,8.8vw,42px); }
@@ -776,12 +949,11 @@ body::before {
   .hero-intro { font-size: 14px; }
   .hero-art { padding: 10px; box-shadow: 8px 9px 0 var(--mint); }
   .hero-art img { max-height: 470px; }
-  .hero-art-tape { top: -19px; padding: 7px 15px; font-size: 8px; }
   .section-title { margin-bottom: 44px; padding: 7px 13px 9px; font-size: 31px; }
-  #about .about-grid { padding: 27px 20px 24px; }
-  #about .about-grid::before { right: 12px; font-size: 9px; }
+  #about .about-grid { padding: 12px 0; }
   .about-grid { gap: 42px; }
-  .profile-card { box-shadow: 6px 7px 0 var(--orange); }
+  .profile-card { box-shadow: 6px 7px 0 var(--ink); transform: none; }
+  .profile-window-bar { height: 38px; padding-inline: 11px; }
   .skill-grid { gap: 14px; }
   .skill-card { min-height: 150px; padding: 14px 8px; box-shadow: 4px 5px 0 var(--ink); }
   .skill-card .skill-icon { width: 48px; height: 48px; }
@@ -804,9 +976,6 @@ body::before {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
-  .hero-sticker,
-  .hero::before,
-  .hero::after,
   .hero-status span { animation: none !important; }
 }
 
@@ -830,9 +999,11 @@ body::before {
   background: transparent;
   box-shadow: none;
   color: var(--folder-ink);
+  cursor: pointer;
   transform: none !important;
   transition: none;
 }
+.project-folder:focus-visible { outline: 5px solid var(--pink); outline-offset: 6px; }
 .project.project-folder { background: transparent !important; }
 .project-folder:nth-child(2) { --folder-color: #171511; --folder-ink: #fff; --folder-accent: var(--pink); z-index: 2; }
 .project-folder:nth-child(3) { --folder-color: var(--yellow); --folder-ink: var(--ink); --folder-accent: var(--blue); z-index: 3; }
@@ -1915,7 +2086,7 @@ body::before {
   .message-book.is-open .message-form { min-height: 610px; }
   .message-book .message-form textarea { min-height: 190px; max-height: 190px; }
   .message-card-area { padding-inline: 14px; }
-  .message-card-stack { min-height: 1040px; height: 1040px; }
+  .message-card-stack { min-height: 320px; height: 320px; }
   .message-card:nth-child(n) { width: min(218px, calc(100% - 44px)); min-height: 142px; }
 }
 
@@ -2032,18 +2203,36 @@ body::before {
 
 /* Monochrome AI Skill gallery */
 .community-modal.is-workflow-gallery .community-dialog {
-  background: #f6f6f4;
+  background: #000;
 }
 
 .community-modal.is-workflow-gallery .community-viewer {
-  background-color: #eae6da;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 29px,
-    rgba(23, 21, 17, .11) 30px,
-    transparent 31px
-  );
+  background: #000;
+}
+
+.community-modal.is-workflow-gallery .community-dialog-header,
+.community-modal.is-workflow-gallery .community-thumbnails {
+  border-color: #2d2d2d;
+  background: #000;
+  color: #fff;
+}
+
+.community-modal.is-workflow-gallery .gallery-modal-eyebrow {
+  color: rgba(255,255,255,.62);
+}
+
+.community-modal.is-workflow-gallery .community-close {
+  border-color: #fff;
+  background: #000;
+  color: #fff;
+}
+
+.community-modal.is-workflow-gallery .community-nav {
+  display: none !important;
+}
+
+.community-modal.is-workflow-gallery .community-feature {
+  touch-action: pan-y;
 }
 
 .workflow-slide {
@@ -2102,4 +2291,138 @@ body::before {
 
 .workflow-thumbnail-preview {
   border: 1px solid #d0d0cc;
+}
+
+/* Keep the previously approved decoration cleanup in every later revision. */
+.hero-stickers,
+.hero-art-tape {
+  display: none !important;
+}
+
+.hero::before,
+.hero::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Mobile gallery refinement: keep phone mockups, keep native pages portrait. */
+#about .profile-card figcaption {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-dialog {
+    display: grid;
+    grid-template-rows: 68px minmax(0,1fr);
+    background: #000;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-dialog-header {
+    position: relative;
+    inset: auto;
+    grid-row: 1;
+    min-height: 68px;
+    padding: max(8px, env(safe-area-inset-top)) 14px 8px;
+    border: 0;
+    background: #000;
+    pointer-events: auto;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-dialog-actions {
+    width: 100%;
+    justify-content: space-between;
+    pointer-events: auto;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-counter {
+    position: static;
+    background: transparent;
+    color: #fff;
+    backdrop-filter: none;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-close {
+    position: static;
+    width: 48px;
+    height: 48px;
+    background: #000;
+    color: #fff;
+    box-shadow: none;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-viewer {
+    position: relative;
+    inset: auto;
+    grid-row: 2;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-feature-phone {
+    width: auto;
+    height: min(calc(100dvh - 82px), 200vw);
+    max-width: calc(100vw - 24px);
+    max-height: calc(100dvh - 82px);
+    aspect-ratio: .47;
+    overflow: hidden;
+    border: 5px solid #050505;
+    border-radius: 42px;
+    background: #050505;
+    box-shadow: 0 18px 48px rgba(0,0,0,.42);
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .ios-status-bar {
+    display: flex;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    height: 31px;
+    border-radius: 31px 31px 0 0;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-screen-crop {
+    position: absolute;
+    inset: 36px 5px 5px;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    border-radius: 0 0 32px 32px;
+    background: #f7f7f7;
+  }
+
+  .community-modal:not(.is-workflow-gallery):not(.is-native-gallery) .community-screen-crop img {
+    width: 100%;
+    height: 104%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 0;
+    background: #f7f7f7;
+    box-shadow: none;
+    transform: translateY(-3.9%);
+  }
+
+  .community-modal.is-native-gallery .community-dialog,
+  .community-modal.is-native-gallery.use-landscape-fallback .community-dialog {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-height: none;
+    transform: none !important;
+  }
+
+  .community-modal.is-native-gallery .community-screen-crop img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
 }
