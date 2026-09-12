@@ -1360,7 +1360,7 @@ footer { border-top: 2px solid var(--ink); background: var(--yellow); color: var
 .resume-demo-time { color: rgba(255,255,255,.58); font: 700 10px/1 var(--mono); white-space: nowrap; }
 
 /* Spacious, image-led case narrative */
-.resume-editorial { --case-heading-size: clamp(16px,1.6vw,22px); --case-subheading-size: 12px; width: min(1240px, 90vw); margin: 100px auto 120px; text-align: left; }
+.resume-editorial { --case-heading-size: clamp(16px,1.6vw,22px); --case-subheading-size: 24px; width: min(1240px, 90vw); margin: 100px auto 120px; text-align: left; }
 .resume-project-meta { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; padding: 32px 0; border-block: 1px solid var(--ink); }
 .resume-project-meta span { color: #686258; font-size: 14px; }
 .resume-project-meta p { font-size: 16px; line-height: 1.7; margin: 10px 0 0; }
@@ -1404,7 +1404,7 @@ footer { border-top: 2px solid var(--ink); background: var(--yellow); color: var
 .resume-feature-visual.case-reveal.is-visible button:hover img { transform: scale(1.025); }
 .resume-chapter-nav a:focus-visible, .resume-feature-visual button:focus-visible { outline: 3px solid #b45c23; outline-offset: 4px; }
 @media (max-width: 760px) {
-  .resume-editorial { --case-subheading-size: 12px; width: calc(100% - 36px); margin-block: 64px; }
+  .resume-editorial { --case-subheading-size: 23px; width: calc(100% - 36px); margin-block: 64px; }
   .resume-project-meta { grid-template-columns: 1fr; gap: 22px; }
   .resume-chapter-nav { top: 68px; gap: 0; width: 100%; justify-content: space-between; border-radius: 14px; }
   .resume-chapter-nav a { padding: 10px 7px; font-size: 14px; border-radius: 8px; }

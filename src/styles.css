@@ -632,10 +632,11 @@ body::before {
   padding: 9px 17px;
   border: 2px solid var(--ink);
   border-radius: 999px;
-  background: var(--yellow);
+  background: var(--pink);
   box-shadow: 4px 5px 0 var(--ink);
   font-family: var(--mono);
-  font-size: clamp(21px,2.2vw,30px);
+  font-size: clamp(48px,4.6vw,72px);
+  line-height: 1;
   letter-spacing: -.03em;
   transform: rotate(-2deg);
 }
@@ -646,12 +647,13 @@ body::before {
   margin: 7px 0;
   padding: 2px 12px 6px;
   border: 2px solid var(--ink);
-  background: var(--pink);
+  background: var(--yellow);
   color: var(--ink);
   -webkit-text-stroke: 0;
   box-shadow: 5px 5px 0 var(--ink);
   transform: rotate(-1.5deg);
 }
+.hero h1 .outlined { font-size: clamp(22px,2.2vw,32px); letter-spacing: -.035em; }
 .hero-status {
   margin: 26px 0 0;
   display: flex;
@@ -942,9 +944,15 @@ body::before {
   .brand-mark { width: 34px; height: 34px; }
   .hero { min-height: 0; padding: 82px 0 88px; }
   .hero-grid { gap: 58px; }
-  .eyebrow { margin-bottom: 20px; font-size: 19px; }
+  .eyebrow { margin-bottom: 24px; padding: 10px 15px 12px; font-size: clamp(39px,11.5vw,46px); }
+  .eyebrow strong {
+    font-weight: 900;
+    -webkit-text-stroke: 1.15px currentColor;
+    paint-order: stroke fill;
+  }
   .hero h1 { font-size: clamp(35px,10.5vw,48px); }
   .hero-tagline { font-size: clamp(29px,8.8vw,42px); }
+  .hero h1 .outlined { margin-block: 10px; padding: 4px 10px 6px; font-size: clamp(21px,6.2vw,26px); }
   .hero-status { align-items: flex-start; font-size: 10px; line-height: 1.5; }
   .hero-intro { font-size: 14px; }
   .hero-art { padding: 10px; box-shadow: 8px 9px 0 var(--mint); }
