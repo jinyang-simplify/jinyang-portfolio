@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "jinyang-portfolio",
+  "pages_build_output_dir": "./dist/client",
+  "compatibility_date": "2026-09-12",
+  "d1_databases": [
+    {
+      "binding": "MESSAGES_DB",
+      "database_name": "jinyang-portfolio-messages",
+      "database_id": "3238dea3-1740-4d09-adae-aad49f0944b4"
+    }
+  ]
+}
