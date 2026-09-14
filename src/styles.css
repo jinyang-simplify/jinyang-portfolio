@@ -2220,6 +2220,7 @@ body::before {
 }
 
 .community-modal.is-workflow-gallery .community-viewer {
+  grid-template-columns: minmax(0, 1fr);
   background: #000;
 }
 
@@ -2245,7 +2246,32 @@ body::before {
 }
 
 .community-modal.is-workflow-gallery .community-feature {
+  grid-column: 1;
+  width: 100%;
   touch-action: pan-y;
+}
+
+@media (min-width: 561px) {
+  .community-modal.is-workflow-gallery .community-feature {
+    min-height: 0;
+  }
+
+  .community-modal.is-workflow-gallery .community-feature-phone {
+    width: auto;
+    height: 100%;
+    max-width: min(100%, 920px);
+    max-height: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .community-modal.is-workflow-gallery .community-screen-crop,
+  .community-modal.is-workflow-gallery .workflow-slide {
+    height: 100%;
+  }
+
+  .community-modal.is-workflow-gallery .workflow-slide {
+    aspect-ratio: auto;
+  }
 }
 
 .workflow-slide {
