@@ -1,10 +1,10 @@
 const screens = [
   '../../assets/projects/resume-notes/screens/01-home.png',
   '../../assets/projects/resume-notes/screens/02-input.png',
-  '../../assets/projects/resume-notes/screens/03-diagnosis.png',
-  '../../assets/projects/resume-notes/screens/04-compare.png',
+  '../../assets/projects/resume-notes/screens/03-diagnosis-full.png',
+  '../../assets/projects/resume-notes/screens/04-compare-full.png',
   '../../assets/projects/resume-notes/screens/05-compare-detail.png',
-  '../../assets/projects/resume-notes/screens/06-export.png',
+  '../../assets/projects/resume-notes/screens/06-export-full.png',
 ]
 
 const resumeDemoChapters = [
@@ -135,6 +135,7 @@ resumeReduceMotion.addEventListener?.('change', event => {
 
 const dialog = document.querySelector('.lightbox')
 const dialogImage = dialog?.querySelector('img')
+const dialogMedia = dialog?.querySelector('.lightbox-media')
 const count = dialog?.querySelector('.lightbox-count')
 let current = 0
 
@@ -144,6 +145,7 @@ const showScreen = index => {
     dialogImage.src = screens[current]
     dialogImage.alt = `稿定简历产品界面 ${String(current + 1).padStart(2, '0')}`
   }
+  dialogMedia?.scrollTo({ top: 0, behavior: 'auto' })
   if (count) count.textContent = `${String(current + 1).padStart(2, '0')} / ${screens.length}`
 }
 
