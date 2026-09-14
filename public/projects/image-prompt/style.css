@@ -365,7 +365,7 @@ img { display: block; max-width: 100%; }
 .prompt-feature-visual figcaption { margin-top: 26px; display: flex; gap: 20px; color: #4e5261; font-size: 14px; line-height: 1.7; }
 .prompt-feature-visual figcaption span { flex-shrink: 0; color: var(--blue); font-weight: 800; }
 .prompt-sample-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.prompt-sample-grid img { width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: left center; border: 2px solid var(--ink); border-radius: 8px; background: #fff; box-shadow: 4px 5px 0 rgba(16,17,20,.16); }
+.prompt-sample-grid img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: contain; object-position: center; border: 2px solid var(--ink); border-radius: 8px; background: #fff; box-shadow: 4px 5px 0 rgba(16,17,20,.16); }
 .prompt-output-visual { background: #e4e6f7; }
 .prompt-output-card { padding: clamp(24px,3vw,44px); border: 2px solid var(--ink); border-radius: 10px; background: #fff; box-shadow: 7px 8px 0 var(--ink); }
 .prompt-output-card small { color: var(--blue); font: 800 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; }

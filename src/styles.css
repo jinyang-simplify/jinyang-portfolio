@@ -1055,6 +1055,7 @@ body::before {
   background: var(--folder-color);
   color: var(--folder-ink);
   box-shadow: 0 10px 0 rgba(23,21,17,.16);
+  transition: transform .38s cubic-bezier(.2,.75,.25,1), box-shadow .38s ease;
 }
 .folder-body::after {
   content: "";
@@ -1265,11 +1266,12 @@ body::before {
 @media (max-width: 700px) {
   #projects { padding-bottom: 90px; }
   #projects .section-title { margin-bottom: 62px; }
-  .project-list { display: grid; gap: 30px; }
+  .project-list { display: block; }
   .project-folder {
-    position: relative;
-    top: auto;
+    position: sticky;
+    top: 70px;
     min-height: 0;
+    margin-bottom: 30px;
     padding-top: 44px;
   }
   .folder-tab { width: 74%; height: 46px; left: 0 !important; padding-left: 17px; font-size: 9px; }
@@ -1280,6 +1282,7 @@ body::before {
   .project-folder p { font-size: 13px; }
   .project-folder .project-image { max-height: none; box-shadow: 6px 7px 0 rgba(23,21,17,.32); }
   .project-folder .project-no { font-size: 13px; }
+  .project-folder.is-current .folder-body { transform: translateY(-4px); box-shadow: 0 14px 0 rgba(23,21,17,.2); }
 }
 
 /* Reference-inspired two-step message area */

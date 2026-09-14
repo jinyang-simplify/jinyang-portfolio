@@ -52,7 +52,7 @@ let projectFolderFrame = 0
 const updateProjectFolders = () => {
   projectFolderFrame = 0
   if (!projectFolders.length) return
-  const stickyTop = window.innerWidth <= 700 ? window.innerHeight * 0.45 : 86
+  const stickyTop = window.innerWidth <= 700 ? 74 : 86
   let activeIndex = 0
   projectFolders.forEach((folder, index) => {
     if (folder.getBoundingClientRect().top <= stickyTop) activeIndex = index
