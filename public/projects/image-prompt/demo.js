@@ -49,6 +49,8 @@ const stages = [
 ]
 
 const delays = [1700, 2500, 4200, 1700, 0]
+const demoCanvas = { width: 754, height: 634 }
+const demoStage = document.querySelector('.demo-stage-scroll')
 const workspace = document.querySelector('.demo-workspace')
 const card = document.querySelector('.demo-card')
 const status = document.querySelector('.demo-status')
@@ -59,6 +61,23 @@ const copy = document.querySelector('.demo-copy')
 const toggle = document.querySelector('.demo-toggle')
 const replay = document.querySelector('.demo-replay')
 const timeline = [...document.querySelectorAll('[data-demo-step]')]
+
+const fitDemoToMobile = () => {
+  const isMobile = window.matchMedia('(max-width: 760px)').matches
+  if (!isMobile) {
+    demoStage.style.removeProperty('--demo-mobile-height')
+    workspace.style.removeProperty('--demo-mobile-scale')
+    return
+  }
+
+  const scale = Math.min(demoStage.clientWidth / demoCanvas.width, 1)
+  workspace.style.setProperty('--demo-mobile-scale', scale.toFixed(4))
+  demoStage.style.setProperty('--demo-mobile-height', `${Math.ceil(demoCanvas.height * scale + 6)}px`)
+}
+
+fitDemoToMobile()
+new ResizeObserver(fitDemoToMobile).observe(demoStage)
+window.addEventListener('orientationchange', fitDemoToMobile)
 
 let current = 0
 let paused = false

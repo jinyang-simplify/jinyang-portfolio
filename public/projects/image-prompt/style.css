@@ -269,8 +269,23 @@ img { display: block; max-width: 100%; }
   .demo-sequence li b { width: 22px; height: 22px; font-size: 8px; }
   .demo-sequence li span { min-width: 0; padding-right: 0; white-space: normal; }
   .demo-controls { align-self: flex-end; }
-  .demo-stage-scroll { margin-right: 0; padding-right: 0; overflow-x: hidden; }
-  .demo-workspace { width: 100%; min-width: 0; box-shadow: 8px 9px 0 var(--blue); }
+  .demo-stage-scroll {
+    position: relative;
+    height: var(--demo-mobile-height, 306px);
+    margin-right: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .demo-workspace {
+    width: 754px;
+    min-width: 754px;
+    height: 634px;
+    aspect-ratio: auto;
+    margin: 0;
+    transform: scale(var(--demo-mobile-scale, .455));
+    transform-origin: left top;
+    box-shadow: 8px 9px 0 var(--blue);
+  }
   .demo-caption { padding-right: 0; }
 }
 
