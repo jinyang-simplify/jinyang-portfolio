@@ -1384,7 +1384,7 @@ footer { border-top: 2px solid var(--ink); background: var(--yellow); color: var
 .resume-pain-points p { margin: 0; font-size: 16px; line-height: 1.8; color: #5c574e; }
 .resume-feature-visual { margin: 0; padding: clamp(16px,4vw,56px); background: #dce8ed; border-radius: 20px; overflow: hidden; }
 .resume-screen-window { position: relative; }
-.resume-screen-scroll { width: 100%; height: clamp(360px,42vw,560px); overflow-y: scroll; overflow-x: hidden; overscroll-behavior: contain; scrollbar-gutter: stable; border: 1px solid #c9c6bd; border-radius: 8px; background: #fff; box-shadow: 0 18px 44px #12324621; cursor: ns-resize; }
+.resume-screen-scroll { width: 100%; height: clamp(360px,42vw,560px); overflow-y: scroll; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; scrollbar-gutter: stable; border: 1px solid #c9c6bd; border-radius: 8px; background: #fff; box-shadow: 0 18px 44px #12324621; cursor: ns-resize; }
 .resume-screen-scroll:focus-visible { outline: 3px solid #b45c23; outline-offset: 4px; }
 .resume-screen-scroll img { width: 100%; height: auto; transform: none !important; transition: none; }
 .resume-screen-expand { position: absolute; z-index: 2; right: 22px; top: 18px; min-height: 38px; padding: 0 12px; border: 1px solid #b8b4ab; border-radius: 999px; background: rgba(255,254,249,.94); color: var(--ink); box-shadow: 2px 3px 0 rgba(23,21,17,.2); font: 800 10px/1 var(--mono); cursor: zoom-in; backdrop-filter: blur(8px); transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
@@ -1431,7 +1431,7 @@ footer { border-top: 2px solid var(--ink); background: var(--yellow); color: var
   .resume-feature-row { margin-top: 0; }
   .resume-feature-visual, .resume-feature-split .resume-feature-visual { padding: 14px; border-radius: 12px; }
   .resume-screen-scroll { height: min(430px, 112vw); }
-  .resume-screen-expand { right: 18px; top: 14px; }
+  .resume-screen-expand { display: none; }
   .resume-feature-visual figcaption { display: block; margin-top: 18px; }
   .resume-feature-visual figcaption span { display: block; margin-bottom: 6px; }
   .resume-outcomes { gap: 10px; }
