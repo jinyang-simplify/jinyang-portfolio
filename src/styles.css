@@ -1282,7 +1282,20 @@ body::before {
   .project-folder p { font-size: 13px; }
   .project-folder .project-image { max-height: none; box-shadow: 6px 7px 0 rgba(23,21,17,.32); }
   .project-folder .project-no { font-size: 13px; }
-  .project-folder.is-current .folder-body { transform: translateY(-4px); box-shadow: 0 14px 0 rgba(23,21,17,.2); }
+  .project-folder .folder-tab,
+  .project-folder .folder-body,
+  .project-folder .project-image,
+  .project-folder .project-image img,
+  .project-folder .collage-grid { transition: none; }
+  .project-folder .folder-tab,
+  .project-folder.is-current .folder-tab { filter: none; }
+  .project-folder.is-current .folder-body { transform: none; box-shadow: 0 10px 0 rgba(23,21,17,.16); }
+  .project-folder.is-current .project-image { transform: rotate(.35deg); box-shadow: 6px 7px 0 rgba(23,21,17,.32); }
+  .project-folder:nth-child(2).is-current .project-image { transform: rotate(-.45deg); }
+  .project-folder:nth-child(3).is-current .project-image { transform: rotate(.25deg); }
+  .project-folder:hover .project-image img,
+  .project-folder:hover .prompt-project-preview > img { transform: none; }
+  .project-folder:hover .collage-grid { transform: rotate(-45deg); }
 }
 
 /* Reference-inspired two-step message area */

@@ -47,12 +47,17 @@ const observer = new IntersectionObserver(
 document.querySelectorAll('.reveal').forEach(element => observer.observe(element))
 
 const projectFolders = [...document.querySelectorAll('.project-folder')]
+const projectFolderMotion = window.matchMedia('(min-width: 701px)')
 let projectFolderFrame = 0
 
 const updateProjectFolders = () => {
   projectFolderFrame = 0
   if (!projectFolders.length) return
-  const stickyTop = window.innerWidth <= 700 ? 74 : 86
+  if (!projectFolderMotion.matches) {
+    projectFolders.forEach(folder => folder.classList.remove('is-current'))
+    return
+  }
+  const stickyTop = 86
   let activeIndex = 0
   projectFolders.forEach((folder, index) => {
     if (folder.getBoundingClientRect().top <= stickyTop) activeIndex = index
@@ -61,6 +66,7 @@ const updateProjectFolders = () => {
 }
 
 const requestProjectFolderUpdate = () => {
+  if (!projectFolderMotion.matches) return
   if (projectFolderFrame) return
   projectFolderFrame = window.requestAnimationFrame(updateProjectFolders)
 }
@@ -68,6 +74,7 @@ const requestProjectFolderUpdate = () => {
 updateProjectFolders()
 window.addEventListener('scroll', requestProjectFolderUpdate, { passive: true })
 window.addEventListener('resize', requestProjectFolderUpdate)
+projectFolderMotion.addEventListener?.('change', updateProjectFolders)
 
 const heroSocials = document.querySelector('.hero-socials')
 const contactPopover = heroSocials?.querySelector('.contact-popover')

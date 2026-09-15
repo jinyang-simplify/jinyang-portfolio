@@ -1430,7 +1430,8 @@ footer { border-top: 2px solid var(--ink); background: var(--yellow); color: var
   .resume-feature-split { grid-template-columns: 1fr; gap: 30px; margin-top: 56px; }
   .resume-feature-row { margin-top: 0; }
   .resume-feature-visual, .resume-feature-split .resume-feature-visual { padding: 14px; border-radius: 12px; }
-  .resume-screen-scroll { height: min(430px, 112vw); }
+  .resume-screen-scroll { height: min(430px, 112vw); overscroll-behavior-y: auto; }
+  .resume-screen-scroll img { pointer-events: none; -webkit-user-drag: none; user-select: none; }
   .resume-screen-expand { display: none; }
   .resume-feature-visual figcaption { display: block; margin-top: 18px; }
   .resume-feature-visual figcaption span { display: block; margin-bottom: 6px; }
